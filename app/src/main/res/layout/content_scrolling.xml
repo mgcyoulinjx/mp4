@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+	android:background="#ffffff"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="#ffffff">
+
+		<ImageView
+			android:id="@+id/content_scrollingImageView"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/text_margin"
+		/>
+
+		<com.tencent.smtt.sdk.WebView
+			android:id="@+id/content_scrollingWebView"
+			android:layout_below="@id/content_scrollingImageView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/text_margin" />
+
+		
+		<Button
+			android:layout_gravity="center"
+			android:id="@+id/conbtn"
+			android:layout_width="match_parent"
+			android:layout_height="50dp"
+			android:layout_margin="5dp"
+			android:text="下载视频"
+			android:textSize="20sp"
+			android:background="@color/colorPrimary"
+			android:layout_below="@id/content_scrollingWebView"
+		/>
+	</RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
