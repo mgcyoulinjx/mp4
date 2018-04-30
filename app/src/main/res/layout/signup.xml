@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<com.qmuiteam.qmui.widget.QMUITopBar
+		android:id="@+id/signupQMUITopBar"
+		android:layout_width="match_parent"
+		android:layout_height="?attr/qmui_topbar_height"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:gravity="center">
+
+		<ImageView
+			android:layout_width="70dp"
+			android:layout_height="70dp"
+			android:src="@drawable/image_1"/>
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:text="注册新帐号送一天会员哦(´-ω-`)！"
+			/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="10dp"
+			android:layout_gravity="center"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_gravity="center_vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="帐号"
+					android:textSize="25sp"
+					android:layout_marginLeft="10dp"/>
+
+				<EditText
+					android:id="@+id/signupEditTextname"
+					android:layout_marginRight="10dp"
+					android:inputType="textVisiblePassword"
+					android:hint="请输入帐号"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginTop="20dp">
+
+				<TextView
+					android:layout_gravity="center_vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="密码"
+					android:textSize="25sp"
+					android:layout_marginLeft="10dp"/>
+
+				<EditText
+					android:id="@+id/signupEditTextpassword"
+					android:layout_marginRight="10dp"
+					android:inputType="textPassword"
+					android:password="true"
+					android:hint="请输入密码"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginTop="20dp">
+
+				<TextView
+					android:layout_gravity="center_vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="邮箱"
+					android:textSize="25sp"
+					android:layout_marginLeft="10dp"/>
+
+				<EditText
+					android:id="@+id/signupEditTextemail"
+					android:layout_marginRight="10dp"
+					android:inputType="textEmailAddress"
+					android:hint="请输入邮箱"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginTop="20dp"
+				android:gravity="center">
+
+				<com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+					android:id="@+id/signupButtonsignup"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="20dp"
+					android:layout_marginRight="20dp"
+					android:textSize="25sp"
+					android:textColor="@color/app_color_blue"
+					android:layout_centerInParent="true"
+					android:gravity="center"
+					android:padding="10dp"
+					android:text="注册"
+					app:qmui_radius="4dp"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+

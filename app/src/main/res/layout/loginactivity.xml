@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+
+	<com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/loginQMUITopBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical"
+		android:gravity="center"
+	>
+
+		<ImageView
+			android:layout_width="70dp"
+			android:layout_height="70dp"
+			android:src="@drawable/image_1"/>
+
+		<LinearLayout
+			android:layout_marginTop="10dp"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<TextView
+					android:layout_gravity="center_vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="帐号"
+					android:textSize="25sp"
+					android:layout_marginLeft="10dp"/>
+
+				<EditText
+					android:id="@+id/loginactivityEditTextname"
+					android:layout_marginRight="10dp"
+					android:inputType="textVisiblePassword"
+					android:hint="请输入帐号"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_marginTop="20dp">
+
+				<TextView
+					android:layout_gravity="center_vertical"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="密码"
+					android:textSize="25sp"
+					android:layout_marginLeft="10dp"/>
+
+				<EditText
+					android:id="@+id/loginactivityEditTextpassword"
+					android:layout_marginRight="10dp"
+					android:inputType="textPassword"
+					android:password="true"
+					android:hint="请输入密码"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:layout_marginTop="20dp"
+				android:gravity="center">
+
+				<com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+					android:id="@+id/loginactivityButtonlogin"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="20dp"
+					android:layout_marginRight="20dp"
+					android:textSize="25sp"
+					android:layout_centerInParent="true"
+					android:textColor="@color/app_color_blue"
+					android:gravity="center"
+					android:padding="10dp"
+					android:text="登录"
+					app:qmui_radius="4dp"/>
+
+				<com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+					android:id="@+id/loginactivityButtonsignup"
+					android:layout_marginLeft="20dp"
+					android:layout_marginTop="10dp"
+					android:layout_marginRight="20dp"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:textColor="@color/app_color_blue"
+					android:textSize="15sp"
+					android:text="没有帐号，我要注册"
+					android:padding="10dp"
+					app:qmui_radius="4dp"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+

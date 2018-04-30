@@ -7,16 +7,17 @@ import android.view.*;
 import android.content.*;
 import android.widget.AdapterView.*;
 import android.*;
-import com.google.android.gms.ads.*;
 import cn.bmob.v3.*;
 import cn.bmob.v3.listener.*;
 import cn.bmob.v3.exception.*;
+import com.qmuiteam.qmui.widget.dialog.*;
+import com.qmuiteam.qmui.widget.*;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener
 {
+	private QMUITopBar mTopBar;
 	private ListView lv;
-	private ProgressBar pro;
-	private InterstitialAd mInterstitialAd;
+	private QMUITipDialog tipDialog;
 	private String[] ads = {
 		"/htm/mp4list7/",
 		"/htm/mp4list1/",
@@ -43,19 +44,45 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		mTopBar = (QMUITopBar) findViewById(R.id.QMUITopBar);
+		mTopBar.setTitle(R.string.app_name);
+		mTopBar.addRightImageButton(R.drawable.image_4, R.id.topbar_right_about_button)
+			.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					initlogin();
+				}
+			});
 		Bmob.initialize(this, "e6b30c43cc144f8b27e0efcdc7e9a8a7");
 		cxads();
 		lv = (ListView) findViewById(R.id.mainListView);
-		pro = (ProgressBar) findViewById(R.id.mainProgressBar);
 		lv.setOnItemClickListener(this);
-		MobileAds.initialize(this, "ca-app-pub-2688831136654780~5865337257");
-		mInterstitialAd = new InterstitialAd(this);
-		mInterstitialAd.setAdUnitId("ca-app-pub-2688831136654780/6601728060");
-		mInterstitialAd.loadAd(new AdRequest.Builder().build());
     }
+
+	private void initlogin()
+	{
+		MyUser bmobUser = BmobUser.getCurrentUser(MyUser.class);
+		if (bmobUser != null)
+		{
+			Intent intent = new Intent(MainActivity.this, VipActivity.class);
+			startActivity(intent);
+		}
+		else
+		{
+			Intent intent = new Intent(MainActivity.this, LogInActivity.class);
+			startActivity(intent);
+		}
+	}
 
 	public void cxads()
 	{
+		tipDialog = new QMUITipDialog.Builder(MainActivity.this)
+			.setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING)
+			.setTipWord("正在加载数据")
+			.create();
+		tipDialog.show();
 		BmobQuery<MyDataBmob> query = new BmobQuery<MyDataBmob>();
 		query.getObject("38c46e8580", new QueryListener<MyDataBmob>(){
 
@@ -65,27 +92,88 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 					if (p2 == null)
 					{
 						MyData.ads = p1.getAds();
-						pro.setVisibility(View.GONE);
+						tipDialog.dismiss();
+						fetchUserInfo();
 						lv.setAdapter(new MyAdapter());
-					}else{
-						Toast.makeText(MainActivity.this,"错误" + p2,Toast.LENGTH_SHORT).show();
+					}
+					else
+					{
+						Toast.makeText(MainActivity.this, "错误" + p2, Toast.LENGTH_SHORT).show();
 					}
 				}
 			});
 	}
 
+	private void fetchUserInfo()
+	{
+		MyUser bmobUser = BmobUser.getCurrentUser(MyUser.class);
+		if (bmobUser != null)
+		{
+			MyUser.fetchUserJsonInfo(new FetchUserInfoListener<String>() {
+					@Override
+					public void done(String s, BmobException e)
+					{
+						if (e == null)
+						{
+							UserData.init();
+							Toast.makeText(MainActivity.this, "数据更新完成", Toast.LENGTH_SHORT).show();
+						}
+						else
+						{
+							Toast.makeText(MainActivity.this, "更新数据错误" + e.toString(), Toast.LENGTH_SHORT).show();
+						}
+					}
+				});
+		}
+
+    }
+
 	@Override
 	public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4)
 	{
-		String url = MyData.ads + ads[p3];
-		Intent intent = new Intent(MainActivity.this, MovieActivity.class);
-		intent.putExtra("ads", url);
-		intent.putExtra("title", name[p3]);
-		startActivity(intent);
-		if (mInterstitialAd.isLoaded())
+		if (UserData.emailVerified)
 		{
-            mInterstitialAd.show();
-        }
+			if (UserData.isVip)
+			{
+				String url = MyData.ads + ads[p3];
+				Intent intent = new Intent(MainActivity.this, MovieActivity.class);
+				intent.putExtra("ads", url);
+				intent.putExtra("title", name[p3]);
+				startActivity(intent);
+			}
+			else
+			{
+				new QMUIDialog.MessageDialogBuilder(MainActivity.this)
+					.setTitle("提示")
+					.setMessage("你的会员已到期")
+					.addAction("确定", new QMUIDialogAction.ActionListener(){
+
+						@Override
+						public void onClick(QMUIDialog p1, int p2)
+						{
+							p1.dismiss();
+						}
+
+
+					}).create().show();
+			}
+		}
+		else
+		{
+			new QMUIDialog.MessageDialogBuilder(MainActivity.this)
+				.setTitle("提示")
+				.setMessage("你的邮箱未激活，请去邮箱激活")
+				.addAction("确定", new QMUIDialogAction.ActionListener(){
+
+					@Override
+					public void onClick(QMUIDialog p1, int p2)
+					{
+						p1.dismiss();
+					}
+
+
+				}).create().show();
+		}
 	}
 
 

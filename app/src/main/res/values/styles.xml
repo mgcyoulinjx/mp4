@@ -1,12 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
+		<item name="android:textAppearanceListItemSmall">@style/QDTextAppearanceListItemSmall</item>item>  
+		<item name="android:textAppearanceListItem">@style/QDtextAppearanceListItem</item>  
+		<item name="android:listPreferredItemHeight">?attr/qmui_list_item_height_higher</item>  
+		<item name="android:listPreferredItemHeightSmall">?attr/qmui_list_item_height</item>
+		<item name="qmui_config_color_blue">@color/app_color_blue</item>item>
+        <item name="qmui_round_btn_bg_color">@color/app_color_blue</item>
+        <item name="qmui_round_btn_border_color">@color/app_color_blue</item>
+        <item name="qmui_round_btn_text_color">#ffffff</item>
+        <item name="qmui_content_spacing_horizontal">20dp</item>
+        <item name="qmui_content_padding_horizontal">@dimen/qmui_content_spacing_horizontal</item>
+		<item name="QMUITopBarStyle">@style/QDTopBar</item>item>
+
+		<item name="qmui_config_color_blue">@color/app_color_blue</item><!--这是一个BUG覆盖了colorAccent的效果-->  
+		<item name="qmui_config_color_red">@color/colorPrimaryDark</item>  
+		<item name="qmui_config_color_background">@color/white</item>
+
     </style>
-	
+
+	<style name="QDTopBar" parent="QMUI.TopBar">
+		<item name="qmui_topbar_bg_color">@color/app_color_blue</item>
+        <item name="qmui_topbar_title_color">#ffffff</item>
+        <item name="qmui_topbar_subtitle_color">#ffffff</item>
+        <item name="qmui_topbar_text_btn_color_state_list">@color/s_topbar_btn_color</item>
+        <item name="qmui_topbar_height">48dp</item>
+        <item name="qmui_topbar_image_btn_height">48dp</item>
+    </style>
+
+	<style name="QDtextAppearanceListItem">  
+		<item name="android:textColor">?attr/qmui_config_color_black</item>  
+		<item name="android:textSize">18sp</item>  
+		<item name="android:background">?attr/qmui_s_list_item_bg_with_border_bottom_inset_left  
+		</item>  
+	</style>  
+
+
+	<style name="QDTextAppearanceListItemSmall">  
+		<item name="android:textColor">?attr/qmui_config_color_gray_4</item>  
+		<item name="android:textSize">16sp</item>  
+		<item name="android:background">?attr/qmui_s_list_item_bg_with_border_bottom_inset_left  
+		</item>  
+	</style>
+
 	<style name="AppTheme.Base" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/accent_material_light</item>
         <item name="colorPrimaryDark">@color/accent_material_light</item>

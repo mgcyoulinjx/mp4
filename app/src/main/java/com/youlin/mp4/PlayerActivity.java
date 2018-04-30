@@ -21,7 +21,6 @@ import android.webkit.*;
 import com.tencent.smtt.sdk.*;
 import android.app.*;
 import android.net.*;
-import com.google.android.gms.ads.*;
 
 public class PlayerActivity extends AppCompatActivity
 {
@@ -35,7 +34,6 @@ public class PlayerActivity extends AppCompatActivity
 	private CollapsingToolbarLayout toolbarlayout;
 	private com.tencent.smtt.sdk.WebView wv;
 	private Button btn;
-	private InterstitialAd mInterstitialAd;
 
 	private String url;
 	private String jieshaotxt;
@@ -149,9 +147,6 @@ public class PlayerActivity extends AppCompatActivity
 
 	private void init()
 	{
-		mInterstitialAd = new InterstitialAd(this);
-		mInterstitialAd.setAdUnitId("ca-app-pub-2688831136654780/6574286830");
-		mInterstitialAd.loadAd(new AdRequest.Builder().build());
 		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		playButton = (ButtonBarLayout) findViewById(R.id.playButton);
 		app_bar = (AppBarLayout)findViewById(R.id.app_bar);
@@ -226,7 +221,7 @@ public class PlayerActivity extends AppCompatActivity
 				@Override
 				public void onClick(View p1)
 				{
-					if (playurl != null && playurl.length() != 0 && mInterstitialAd.isLoaded())
+					if (playurl != null && playurl.length() != 0)
 					{
 						DownloadManager.Request request = new DownloadManager.Request(Uri.parse(playurl));
 						request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -236,7 +231,6 @@ public class PlayerActivity extends AppCompatActivity
 						request.setDestinationUri(Uri.fromFile(saveFile));
 						DownloadManager manager = (DownloadManager) getApplicationContext().getSystemService(Context.DOWNLOAD_SERVICE);
 						manager.enqueue(request);
-						mInterstitialAd.show();
 						Snackbar.make(toolbarlayout, "已加入下载列表", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 					}
 					else

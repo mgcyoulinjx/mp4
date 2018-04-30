@@ -13,6 +13,7 @@ import java.util.regex.*;
 import android.util.*;
 import android.widget.AdapterView.*;
 import android.view.*;
+import com.qmuiteam.qmui.widget.*;
 
 
 public class MovieActivity extends AppCompatActivity implements OnItemClickListener
@@ -30,6 +31,7 @@ public class MovieActivity extends AppCompatActivity implements OnItemClickListe
 	private String httpurl;
 	private LinearLayout linearLayout;
 	private LinearLayout linearLayout1;
+	private QMUITopBar topbar;
 	private Handler mHandler = new Handler(){
 
 		@Override
@@ -77,13 +79,23 @@ public class MovieActivity extends AppCompatActivity implements OnItemClickListe
 
 	private void init()
 	{
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setTitle(title);
 		lv = (ListView) findViewById(R.id.movieactivityListView);
+		topbar = (QMUITopBar) findViewById(R.id.movieactivityQMUITopBar);
 		footView = getLayoutInflater().inflate(R.layout.footview, null);
 		linearLayout = (LinearLayout) findViewById(R.id.movieactivityLinearLayout);
 		linearLayout1 = (LinearLayout) footView.findViewById(R.id.footviewLinearLayout);
 		btn = (Button) footView.findViewById(R.id.footviewButton);
+		topbar.setTitle(title);
+		topbar.addLeftBackImageButton().setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					finish();
+				}
+				
+			
+		});
 		btn.setOnClickListener(new OnClickListener(){
 
 				@Override
