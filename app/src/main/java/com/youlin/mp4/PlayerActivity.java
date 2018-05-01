@@ -111,21 +111,21 @@ public class PlayerActivity extends AppCompatActivity
 						Document doc = Jsoup.parse(html);
 						Elements titlediv = doc.select("div.container");
 						title = titlediv.select("h3").text();
-						Log.d("tiaoshi", title);
+						
 						Elements titleimg = titlediv.select("div.col-md-9");
 						for (Element element : titleimg)
 						{
 							String titletext = element.html();
 							String text = titletext.replace(" ", "");
-							Log.d("tiaoshi", text);
+							
 							titleimgads = text.substring(text.indexOf("\"") + 1, text.indexOf("title") - 1);
 						}
 
 						Elements jieshao = doc.select("div.info");
 						jieshaotxt = jieshao.first().html();
-						Log.d("tiaoshi", jieshaotxt.toString());
+						
 						jieshaoimgads = doc.select("div.bigpic").select("img").attr("src");
-						Log.d("tiaoshi", jieshaoimgads);
+						
 						Elements script= doc.select("SCRIPT");
 						for (Element element : script)
 						{
@@ -134,7 +134,7 @@ public class PlayerActivity extends AppCompatActivity
 							if (text.contains("varGvodUrls="))
 							{
 								playurl = text.substring(text.indexOf("\"") + 1, text.lastIndexOf("\""));
-								Log.d("tiaoshi", playurl);
+								
 							}
 						}
 					}
@@ -226,8 +226,8 @@ public class PlayerActivity extends AppCompatActivity
 						DownloadManager.Request request = new DownloadManager.Request(Uri.parse(playurl));
 						request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
 						request.setTitle(title);
-						request.setDescription("AV影视");
-						File saveFile = new File(Environment.getExternalStorageDirectory(), title + ".mp4");
+						request.setDescription("蓝影影视");
+						File saveFile = new File(Environment.getExternalStorageDirectory(),"蓝影影视下载目录/" + title + ".mp4");
 						request.setDestinationUri(Uri.fromFile(saveFile));
 						DownloadManager manager = (DownloadManager) getApplicationContext().getSystemService(Context.DOWNLOAD_SERVICE);
 						manager.enqueue(request);
@@ -279,7 +279,7 @@ public class PlayerActivity extends AppCompatActivity
 			if (bitmap != null)
 			{
 				imageView.setImageBitmap(bitmap);
-				Log.d("tiaoshi", "完成");
+				
 			}
 			else
 			{

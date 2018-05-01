@@ -25,7 +25,7 @@ public class UserData
 			useVipTime = (Integer) BmobUser.getObjectByKey("usedata");
 			final Long time = useVipTime.longValue();
 			emailVerified = (Boolean) BmobUser.getObjectByKey("emailVerified");
-			Log.d("userdata",useName+ useEmail+useVipTime+emailVerified);
+			
 			Bmob.getServerTime(new QueryListener<Long>(){
 
 					@Override
@@ -33,7 +33,7 @@ public class UserData
 					{
 						if (p2 == null)
 						{
-							Log.d("userdata",p1.toString());
+							
 							if (time > p1)
 							{
 								isVip = true;

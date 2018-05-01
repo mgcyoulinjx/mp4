@@ -12,11 +12,13 @@ import cn.bmob.v3.listener.*;
 import cn.bmob.v3.exception.*;
 import com.qmuiteam.qmui.widget.dialog.*;
 import com.qmuiteam.qmui.widget.*;
+import com.tencent.bugly.crashreport.*;
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener
 {
 	private QMUITopBar mTopBar;
 	private ListView lv;
+	private boolean a;
 	private QMUITipDialog tipDialog;
 	private String[] ads = {
 		"/htm/mp4list7/",
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 					initlogin();
 				}
 			});
+		CrashReport.initCrashReport(getApplicationContext(), "76ea692997",false);
 		Bmob.initialize(this, "e6b30c43cc144f8b27e0efcdc7e9a8a7");
 		cxads();
 		lv = (ListView) findViewById(R.id.mainListView);
@@ -115,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 					{
 						if (e == null)
 						{
+							a = true;
 							UserData.init();
 							Toast.makeText(MainActivity.this, "数据更新完成", Toast.LENGTH_SHORT).show();
 						}
@@ -131,21 +135,40 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 	@Override
 	public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4)
 	{
-		if (UserData.emailVerified)
+		if (a)
 		{
-			if (UserData.isVip)
+			if (UserData.emailVerified)
 			{
-				String url = MyData.ads + ads[p3];
-				Intent intent = new Intent(MainActivity.this, MovieActivity.class);
-				intent.putExtra("ads", url);
-				intent.putExtra("title", name[p3]);
-				startActivity(intent);
+				if (UserData.isVip)
+				{
+					String url = MyData.ads + ads[p3];
+					Intent intent = new Intent(MainActivity.this, MovieActivity.class);
+					intent.putExtra("ads", url);
+					intent.putExtra("title", name[p3]);
+					startActivity(intent);
+				}
+				else
+				{
+					new QMUIDialog.MessageDialogBuilder(MainActivity.this)
+						.setTitle("提示")
+						.setMessage("你的会员已到期")
+						.addAction("确定", new QMUIDialogAction.ActionListener(){
+
+							@Override
+							public void onClick(QMUIDialog p1, int p2)
+							{
+								p1.dismiss();
+							}
+
+
+						}).create().show();
+				}
 			}
 			else
 			{
 				new QMUIDialog.MessageDialogBuilder(MainActivity.this)
 					.setTitle("提示")
-					.setMessage("你的会员已到期")
+					.setMessage("你的邮箱未激活，请去邮箱激活")
 					.addAction("确定", new QMUIDialogAction.ActionListener(){
 
 						@Override
@@ -162,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 		{
 			new QMUIDialog.MessageDialogBuilder(MainActivity.this)
 				.setTitle("提示")
-				.setMessage("你的邮箱未激活，请去邮箱激活")
+				.setMessage("请稍候，用户信息还未加载完成")
 				.addAction("确定", new QMUIDialogAction.ActionListener(){
 
 					@Override
@@ -170,8 +193,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 					{
 						p1.dismiss();
 					}
-
-
 				}).create().show();
 		}
 	}

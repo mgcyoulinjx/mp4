@@ -55,7 +55,6 @@ public class SignUpActivity extends AppCompatActivity
 							{
 								if (p2 == null)
 								{
-									Log.d("userdata",p1.toString());
 									int time = p1.intValue();
 									String name = ed_name.getText().toString();
 									String password = ed_password.getText().toString();

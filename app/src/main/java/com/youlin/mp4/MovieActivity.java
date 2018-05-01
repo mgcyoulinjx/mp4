@@ -43,7 +43,7 @@ public class MovieActivity extends AppCompatActivity implements OnItemClickListe
 			{
 				case 0:
 					linearLayout.setVisibility(View.GONE);//ProgressBar提示隐藏
-					adapter = new MyAdapter(list);
+					adapter = new MyAdapter(MovieActivity.this,list);
 					lv.setAdapter(adapter);
 					break;
 
@@ -160,7 +160,7 @@ public class MovieActivity extends AppCompatActivity implements OnItemClickListe
 						Elements intdiv = doc.select("div.pagination");
 						String wei = intdiv.select("a:contains(尾页)").first().attr("href");
 						yeshu = getint(wei);
-						Log.d("int", yeshu + "");
+						
 
 						for (Element element : a)
 						{
